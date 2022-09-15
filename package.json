@@ -1,0 +1,24 @@
+{
+  "name": "drs",
+  "version": "0.0.1",
+  "description": "a dynamic self-hostable rating system",
+  "main": "dist/index.js",
+  "repository": "https://github.com/eddie-englund/dynamic-rating-system.git",
+  "author": "Eddie Englund <eddie.englund@mingodesk.com>",
+  "license": "GPL-3.0-or-later",
+  "private": false,
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.7.18",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "argon2": "^0.29.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "zod": "^3.19.1"
+  }
+}

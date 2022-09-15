@@ -1,0 +1,48 @@
+{
+	"root": true,
+	"extends": ["marine/node"],
+	"parserOptions": {
+		"project": "./tsconfig.eslint.json"
+	},
+	"rules": {
+		"@typescript-eslint/no-unnecesarry-type-assertion": 0,
+		"no-unused-vars": 2,
+		"@typescript-eslint/no-unused-vars": 2,
+		"no-console": 1,
+		"@typescript-eslint/indent": [2, "tab"],
+		"comma-dangle": "off",
+		"prefer-arrow-callback": "error",
+		"no-trailing-spaces": "error",
+		"quotes": ["warn", "single", { "avoidEscape": true }]
+	},
+	"overrides": [
+		{
+			"files": ["**/*.ts", "**/*.tsx"],
+			"parser": "@typescript-eslint/parser",
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"rules": {
+				"@typescript-eslint/no-non-null-assertion": "off",
+				"@typescript-eslint/no-use-before-define": "off",
+				"@typescript-eslint/no-warning-comments": "off",
+				"@typescript-eslint/no-empty-function": "off",
+				"@typescript-eslint/no-var-requires": "off",
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/explicit-module-boundary-types": "off",
+				"@typescript-eslint/ban-types": "off",
+				"@typescript-eslint/camelcase": "off",
+				"node/no-missing-import": "off",
+				"node/no-empty-function": "off",
+				"node/no-unsupported-features/es-syntax": "off",
+				"node/no-missing-require": "off",
+				"node/shebang": "off",
+				"no-dupe-class-members": "off",
+				"require-atomic-updates": "off",
+				"newline-per-chained-call": "off",
+				"no-tabs": 2,
+				"no-mixed-spaces-and-tabs": 2,
+				"@typescript-eslint/indent": ["error", 2],
+				"indent": "off"
+			}
+		}
+	]
+}
