@@ -7,12 +7,13 @@ interface Collections {
   [key: string]: Collection
 }
 
-export let collections: Collections
+export let collections: Collections = {}
 
 
 export const connect = async () => {
   const client = new MongoClient(process.env.MONGODB_URI)
 
+  logger.info('')
   await client.connect()
 
   db = client.db(process.env.MONGODB_NAME)

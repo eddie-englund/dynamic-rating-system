@@ -1,4 +1,4 @@
-import { initApp } from 'app'
+import { initApp } from './app'
 import dotenv from 'dotenv'
 
 dotenv.config()

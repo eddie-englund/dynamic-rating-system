@@ -1,0 +1,30 @@
+version: '3.9'
+networks:
+  rds-databases:
+    external: true
+  traefik_proxy:
+    external: true
+services:
+  drs-backend:
+    env_file:
+      - './backend.env'
+    container_name: 'drs-backend'
+    volumes:
+      - drs-backend_data:/app/store
+    build:
+      context: ../../
+      dockerfile: dockerfile
+      target: runner
+    ports:
+      - 8080:8080
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_proxy"
+      - "traefik.http.routers.paste.rule=Host(`YOURDOMAINERE.COM`)"
+      - "traefik.http.routers.paste.tls.certResolver=letsencrypt"
+    networks:
+      - traefik_proxy
+      - rds-databases
+      - default
+volumes:
+  drs-backend_data:
