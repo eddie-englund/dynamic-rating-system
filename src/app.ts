@@ -13,6 +13,7 @@ export const initApp = async (): Promise<void> => {
   const ORIGINS = process.env.CORS_ORIGINS ? process.env.CORS_ORIGINS.split('|') : '*';
 
   app.use(helmet())
+  app.use(Express.json())
   app.use(cors({
     origin: ORIGINS,
     optionsSuccessStatus: 200,

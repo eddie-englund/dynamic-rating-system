@@ -5,6 +5,7 @@ declare global {
       CORS_ORIGINS: string | undefined;
       MONGODB_URI: string;
       MONGODB_NAME: string;
+      JWT_SECRET: string;
     }
   }
 }

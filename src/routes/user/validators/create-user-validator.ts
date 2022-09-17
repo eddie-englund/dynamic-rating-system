@@ -19,7 +19,9 @@ export type UserCreateSchema = z.infer<typeof userCreateSchema>
 
 export const userCreateValidator = async (req: Request, res: Response, next: NextFunction) => {
   const parse = await userCreateSchema.safeParseAsync(req.body)
-  if (!parse.success) return res.status(400).send({ success: false, error: { ...parse.error } })
+  if (!parse.success) return res
+    .status(400)
+    .send({ success: false, error: { ...parse.error } })
   req.body = parse.data
   next()
 }
