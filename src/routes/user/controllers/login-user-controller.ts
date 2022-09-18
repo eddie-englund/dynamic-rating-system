@@ -34,7 +34,6 @@ export const loginUser = async (req: TypedRequestBody<{ username: string, passwo
     {},
     process.env.JWT_SECRET,
     {
-      algorithm: 'RS256',
       expiresIn: '60s',
     })
   
@@ -44,7 +43,6 @@ export const loginUser = async (req: TypedRequestBody<{ username: string, passwo
     },
     process.env.JWT_SECRET,
     {
-      algorithm: 'RS512',
       expiresIn: '2 days'
     }
   )
@@ -59,11 +57,11 @@ export const loginUser = async (req: TypedRequestBody<{ username: string, passwo
         httpOnly: true,
         secure: false
       }
-  )
+    )
     .send({
       sucess: true,
       accessToken,
       token_type: 'bearer',
-      expiresIn: ms('60s')
+      expires: ms('60s')
     })
 }
