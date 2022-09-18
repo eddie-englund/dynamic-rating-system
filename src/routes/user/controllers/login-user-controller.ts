@@ -11,43 +11,45 @@ const errorMsg = "Invalid username or password."
 
 export const loginUser = async (req: TypedRequestBody<{ username: string, password: string }>, res: Response) => {
   const user = await getCollections()
-    .users
+    .users!
     .findOne({ username: req.body.username })
     .catch(e => {
       logger.error(e);
-      return res.status(400).send({ msg: errorMsg, success: false })
+      return res
+        .status(400)
+        .send({ msg: errorMsg, success: false })
     }) as User
-  
-  if (!user) return res.status(400).send({ msg: errorMsg, success: false })
+
+  if (!user) return res
+    .status(400)
+    .send({ msg: errorMsg, success: false })
+
   const validPassword = await argon2
     .verify(user.password, req.body.password)
     .catch(e => {
       logger.error(e);
       return res.status(400).send({ msg: errorMsg, success: false })
     })
-  
+
   if (!validPassword) res.status(400).send({ msg: errorMsg, success: false })
-  
+
   // TODO: Add roles here
+    const accessToken = jwt.sign(
+      {
+        userId: user._id
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '60s',
+      })
 
-  const accessToken = jwt.sign(
-    {},
-    process.env.JWT_SECRET,
-    {
-      expiresIn: '60s',
-    })
-  
-  const refreshToken = jwt.sign(
-    {
-      userId: user._id
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: '2 days'
-    }
-  )
+    const refreshToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: '2 days' }
+    )
 
-  return res
+    return res
     .status(200)
     .cookie(
       "refreshToken",

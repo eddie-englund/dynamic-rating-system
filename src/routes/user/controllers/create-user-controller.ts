@@ -15,9 +15,13 @@ export const createUser = async (req: TypedRequestBody<UserCreateSchema>, res: R
         .send({ success: false, msg: "Password hashing failed, please try again." });
     })
 
-  await getCollections().users.insertOne({
+  if (!hashed) res
+    .status(500)
+    .send({ success: false, msg: "Password hashing failed, please try again." });
+
+  await getCollections().users!.insertOne({
     username: req.body.username,
-    password: hashed
+    password: hashed!
   }).catch(e => {
     logger.error(e)
     res
