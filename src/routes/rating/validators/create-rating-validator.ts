@@ -33,15 +33,17 @@ const ratingCreateSchema = z.object({
     .min(1)
     .max(1024)
     .optional()
-})
+});
 
-export type RatingCreateSchema = z.infer<typeof ratingCreateSchema>
+export type RatingCreateSchema = z.infer<typeof ratingCreateSchema>;
 
 export const ratingCreateValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const parse = await ratingCreateSchema.safeParseAsync(req.body)
-  if (!parse.success) return res
-    .status(400)
-    .send({ success: false, error: { ...parse.error } })
-  req.body = parse.data
-  next()
-}
+  const parse = await ratingCreateSchema.safeParseAsync(req.body);
+  if (!parse.success) {
+    return res
+      .status(400)
+      .send({ success: false, error: { ...parse.error } });
+  }
+  req.body = parse.data;
+  next();
+};

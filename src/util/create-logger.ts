@@ -1,7 +1,7 @@
-import winston, { Logger } from 'winston'
+import winston, { Logger } from 'winston';
 import { consoleFormat } from 'winston-console-format';
 
-const appName = "RDS - backend"
+const appName = 'RDS - backend';
 
 export const createLogger = (): Logger => {
   let logger = winston.createLogger({
@@ -29,10 +29,10 @@ export const createLogger = (): Logger => {
     ),
     defaultMeta: { svc: appName },
     transports: [new winston.transports.Console()],
-  })
+  });
 
   if (process.env.NODE_ENV.toLocaleLowerCase() === 'production') {
-    logger =  winston.createLogger({
+    logger = winston.createLogger({
       levels: Object.assign(
         { fatal: 0, warn: 4, trace: 7 },
         winston.config.syslog.levels,
@@ -47,4 +47,4 @@ export const createLogger = (): Logger => {
   }
 
   return logger;
-}
+};

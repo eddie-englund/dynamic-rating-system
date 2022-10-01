@@ -1,6 +1,8 @@
-import { initApp } from './app'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import { initApp } from './app';
 
-dotenv.config()
+dotenv.config();
 
-initApp()
+(async () => {
+  await initApp();
+});

@@ -1,30 +1,29 @@
-import { logger } from '../app'
-import { Collection, Db, MongoClient } from 'mongodb'
-import { User } from './models/user'
-
-let db: Db
+import { Collection, Db, MongoClient } from 'mongodb';
+import { Rating } from './models/rating';
+import { User } from './models/user';
+import { logger } from '../app';
 
 interface Collections {
-  [key: string]: Collection<any>
+  users?: Collection<User>;
+  ratings?: Collection<Rating>;
 }
 
-export let collections: Collections = {}
+export const collections: Collections = {};
 
 
 export const connect = async () => {
-  logger.info(`Initalizing connection to database ${process.env.MONGODB_NAME}`)
-  const client = new MongoClient(process.env.MONGODB_URI)
-  await client.connect()
+  logger.info(`Initalizing connection to database ${process.env.MONGODB_NAME}`);
+  const client = new MongoClient(process.env.MONGODB_URI);
+  await client.connect();
 
-  db = client.db(process.env.MONGODB_NAME)
-  const ratingsCollection = db.collection('ratings')
-  const usersCollection = db.collection<User>('users')
+  const db: Db = client.db(process.env.MONGODB_NAME);
+  const ratingsCollection = db.collection<Rating>('ratings');
+  const usersCollection = db.collection<User>('users');
 
   collections.ratings = ratingsCollection;
-  collections.users = usersCollection
+  collections.users = usersCollection;
 
-  logger.info('Initalization of database successful')
-}
+  logger.info('Initalization of database successful');
+};
 
-export const getDB = (): Db => db
-export const getCollections = (): Collections => collections
+export const getCollections = (): Collections => collections;

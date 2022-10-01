@@ -9,10 +9,8 @@ export const getUser = async (req: Request, res: Response) => {
   if (!validMongoId) return res
     .status(400)
     .send({ msg: "Invalid userId", success: false });
-  
-  console.log(req.params)
-  
-  const user = await getCollections().users
+
+  const user = await getCollections().users!
     .findOne({ _id: new ObjectId(req.params.id) })
     .catch(e => {
       logger.error(e)
@@ -20,13 +18,11 @@ export const getUser = async (req: Request, res: Response) => {
         .status(400)
         .send({ success: false, msg: "No such user" })
     }) as User
-  
-  logger.info(`Returning user ${user}`)
 
   if (!user) return res
     .status(400)
     .send({ success: false, msg: "No such user" })
-  
+
   return res
     .status(200)
     .send({ id: user._id, username: user.username })
