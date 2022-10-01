@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import { router as ratingRouter } from './rating/rating-router';
-import { router as userRouter } from './user/user-router';
+import userRouter from './user/user-router';
 import { logger } from '../app';
 
 export const initRoutes = (app: Application): void => {
@@ -9,5 +9,5 @@ export const initRoutes = (app: Application): void => {
   app.get('/api', (_, res) => res.status(200).send({ success: true, message: 'Hearbeat confirmed ♥' }));
 
   app.use('/api/user', userRouter);
-  app.use('api/rating', ratingRouter);
+  app.use('/api/rating', ratingRouter);
 };

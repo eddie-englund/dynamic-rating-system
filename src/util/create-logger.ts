@@ -31,7 +31,7 @@ export const createLogger = (): Logger => {
     transports: [new winston.transports.Console()],
   });
 
-  if (process.env.NODE_ENV.toLocaleLowerCase() === 'production') {
+  if (process.env.NODE_ENV.toLowerCase() === 'production') {
     logger = winston.createLogger({
       levels: Object.assign(
         { fatal: 0, warn: 4, trace: 7 },

@@ -11,8 +11,6 @@ const failedObj = {
 };
 
 export const createRating = async (req: TypedJwtRequest<RatingCreateBody>, res: Response) => {
-  if (req.jwt?.userId) return res.status(400).send({ success: false, msg: 'Invalid login' });
-
   try {
     const newRating = await getCollections().ratings!.insertOne({
       title: req.body.title,

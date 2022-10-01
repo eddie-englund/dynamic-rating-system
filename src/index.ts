@@ -1,9 +1,5 @@
-import 'express-async-errors';
 import dotenv from 'dotenv';
+dotenv.config();
 import { initApp } from './app';
 
-dotenv.config();
-
-(async () => {
-  await initApp();
-});
+initApp().catch(e => console.error('Error while initalizing app', e));

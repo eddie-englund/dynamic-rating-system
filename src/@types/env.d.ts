@@ -6,8 +6,10 @@ declare global {
       MONGODB_URI: string;
       MONGODB_NAME: string;
       JWT_SECRET: string;
+      COOKIE_SECRET: string;
+      REDIS_URI: string;
     }
   }
 }
 
-export {}
+export { }
