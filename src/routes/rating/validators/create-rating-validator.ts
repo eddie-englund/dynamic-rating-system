@@ -1,7 +1,6 @@
-import { NextFunction, Request, Response } from 'express';
 import { z } from 'zod';
 
-const ratingCreateSchema = z.object({
+export const ratingCreateSchema = z.object({
   title: z
     .string()
     .trim()
@@ -35,15 +34,4 @@ const ratingCreateSchema = z.object({
     .optional()
 });
 
-export type RatingCreateSchema = z.infer<typeof ratingCreateSchema>;
-
-export const ratingCreateValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const parse = await ratingCreateSchema.safeParseAsync(req.body);
-  if (!parse.success) {
-    return res
-      .status(400)
-      .send({ success: false, error: { ...parse.error } });
-  }
-  req.body = parse.data;
-  next();
-};
+export type RatingCreateBody = z.infer<typeof ratingCreateSchema>;

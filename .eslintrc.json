@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": ["marine/node", "plugin:@typescript-eslint/recommended"],
+	"extends": ["marine/node"],
 	"parser": "@typescript-eslint/parser",
 	"plugins": ["@typescript-eslint"],
 	"parserOptions": {
@@ -41,7 +41,9 @@
 				"no-tabs": 2,
 				"no-mixed-spaces-and-tabs": 2,
 				"@typescript-eslint/indent": ["error", 2],
-				"indent": "off"
+				"indent": "off",
+				"@typescript-eslint/no-unused-vars": "error",
+				"no-unused-vars": "off"
 			}
 		}
 	]
