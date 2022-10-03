@@ -41,7 +41,7 @@ export const loginUser = async (req: TypedRequestBody<{ username: string; passwo
     );
 
     const refreshToken = jwt.sign(
-      { userId: user._id },
+      { userId: user._id, permissions: user.permissions },
       process.env.JWT_SECRET,
       { expiresIn: '2 days' }
     );
@@ -53,7 +53,6 @@ export const loginUser = async (req: TypedRequestBody<{ username: string; passwo
         refreshToken,
         {
           maxAge: ms('2 days'),
-          httpOnly: true,
           secure: false
         }
       )
